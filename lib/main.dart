@@ -5,16 +5,19 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    questionIndex++;
+    print(questionIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     var ques = [
-      'What\s your name',
-      'What\'s your age',
+      'What\s your name?',
+      'What\'s your age?',
     ];
-
-    void answerQuestion() {
-      print('Answer Chosen!');
-    }
 
     return MaterialApp(
       home: Scaffold(
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
           children: <Widget>[
             Text('The Question'),
             RaisedButton(
-              child: Text('Answer 1'),
+              child: Text(ques[0]),
               onPressed: answerQuestion,
               //WHILE USING RAISED BUTTON, ONPRESSED: METHOD WITHOUT PARANTHESES
             ),
