@@ -7,12 +7,40 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var ques = [
+      'What\s your name',
+      'What\'s your age',
+    ];
+
+    void answerQuestion() {
+      print('Answer Chosen!');
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Main Title'),
         ),
-        body: Text('This is the body'),
+        body: Column(
+          children: <Widget>[
+            Text('The Question'),
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: answerQuestion,
+              //WHILE USING RAISED BUTTON, ONPRESSED: METHOD WITHOUT PARANTHESES
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: () => print('Answer 2 Selected'),
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: () {
+                print('Answer 3 Selected');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
