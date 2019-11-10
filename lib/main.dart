@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/answers.dart';
 import './Questions.dart';
 
 void main() {
@@ -37,21 +38,9 @@ class MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             Questions(ques[_questionIndex]),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: _answerQuestion,
-              //WHILE USING RAISED BUTTON, ONPRESSED: METHOD WITHOUT PARANTHESES
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: () => print('Answer 2 Selected'),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () {
-                print('Answer 3 Selected');
-              },
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
