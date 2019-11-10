@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/answers.dart';
+import './Answers.dart';
 import './Questions.dart';
 
 void main() {
@@ -26,21 +26,38 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var ques = [
-      'What\'s your name?',
-      'What\'s your age?',
+      {
+        'questionSet': 'What\'s your name?',
+        'answerSet': ['Gaurav', 'Rishabh', 'Lakshay', 'Shubham'],
+      },
+      {
+        'questionSet': 'What\'s your age?',
+        'answerSet': ['10', '20', '30', '40'],
+      },
+      {
+        'questionSet': 'What\'s your Favourite Color?',
+        'answerSet': ['Black', 'Blue', 'Red', 'White'],
+      },
     ];
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Quiz App'),
+          backgroundColor: Colors.pink,
+          title: Text(
+            'Quiz App',
+            textAlign: TextAlign.center,
+          ),
         ),
         body: Column(
           children: <Widget>[
-            Questions(ques[_questionIndex]),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            Questions(
+              ques[_questionIndex]['questionSet'],
+            ),
+            ...(ques[_questionIndex]['answerSet'] as List<String>)
+                .map((answer) {
+              return Answers(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
