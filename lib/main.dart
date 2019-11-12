@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './Answers.dart';
-import './Questions.dart';
+import './Result.dart';
+import './Quiz.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,33 +15,49 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     // var aBool = true;
     // aBool = false;
-
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
     print(_questionIndex);
-    if (_questionIndex < ques.length) {
+    if (_questionIndex < _ques.length) {
       print('We have more questons');
     } else
       (print('No more questions'));
   }
 
-  final ques = const [
+  final _ques = const [
     {
       'questionSet': 'What\'s your name?',
-      'answerSet': ['Gaurav', 'Rishabh', 'Lakshay', 'Shubham'],
+      'answerSet': [
+        {'option': 'Gaurav', 'score': 4},
+        {'option': 'Rishabh', 'score': 3},
+        {'option': 'Lakshay', 'score': 2},
+        {'option': 'Shubham', 'score': 1},
+      ],
     },
     {
       'questionSet': 'What\'s your age?',
-      'answerSet': ['10', '20', '30', '40'],
+      'answerSet': [
+        {'option': '10', 'score': 1},
+        {'option': '20', 'score': 2},
+        {'option': '30', 'score': 3},
+        {'option': '40', 'score': 4},
+      ],
     },
     {
       'questionSet': 'What\'s your favourite color?',
-      'answerSet': ['Black', 'Blue', 'Red', 'White'],
+      'answerSet': [
+        {'option': 'Black', 'score': 4},
+        {'option': 'Blue', 'score': 3},
+        {'option': 'Red', 'score': 2},
+        {'option': 'White', 'score': 1},
+      ],
     },
   ];
 
@@ -58,21 +74,12 @@ class MyAppState extends State<MyApp> {
             textAlign: TextAlign.center,
           ),
         ),
-        body: _questionIndex < ques.length
-            ? Column(
-                children: <Widget>[
-                  Questions(
-                    ques[_questionIndex]['questionSet'],
-                  ),
-                  ...(ques[_questionIndex]['answerSet'] as List<String>)
-                      .map((answer) {
-                    return Answers(_answerQuestion, answer);
-                  }).toList()
-                ],
-              )
-            : Center(
-                child: Text('You did it!'),
-              ),
+        body: _questionIndex < _ques.length
+            ? Quiz(
+                ques: _ques,
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex)
+            : Result(_totalScore),
       ),
     );
   }
