@@ -27,8 +27,14 @@ class MyAppState extends State<MyApp> {
     print(_questionIndex);
     if (_questionIndex < _ques.length) {
       print('We have more questons');
-    } else
-      (print('No more questions'));
+    }
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
   }
 
   final _ques = const [
@@ -79,7 +85,7 @@ class MyAppState extends State<MyApp> {
                 ques: _ques,
                 answerQuestion: _answerQuestion,
                 questionIndex: _questionIndex)
-            : Result(_totalScore),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
